@@ -89,17 +89,24 @@ runcmd:
   - sed -i 's/^memory_limit = .*/memory_limit = 512M/' /etc/php/7.4/apache2/php.ini
   - systemctl restart apache2
   - mysql_secure_installation <<EOF
-  - '12345678'
+  #Current password for root:
+  - 'senha root'
+  #Unix_socket authentication:
   - n
+  #Change the root password?
   - n
+  #Remove anonymous users?
   - y
+  #Disallow root login remotely?
   - y
+  #Remove test database and access to it?
   - y
+  #Reload privilege tables now?
   - y
   - EOF
   - mysql <<EOF
   - CREATE DATABASE syspassdb;
-  - GRANT ALL PRIVILEGES ON syspassdb.* TO 'syspassuser'@'localhost' IDENTIFIED BY '12345678';
+  - GRANT ALL PRIVILEGES ON syspassdb.* TO 'syspassuser'@'localhost' IDENTIFIED BY 'senha root';
   - FLUSH PRIVILEGES;
   - EXIT
   - EOF
